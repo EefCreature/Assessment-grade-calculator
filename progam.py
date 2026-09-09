@@ -1,11 +1,17 @@
+def coe(vall,type:type):
+    try:
+        type(vall)
+    except:
+        return 0
 
+    pass
 
 def grade_calculation(grade: int,grade_total: int,waiting: float):
     grade = int(grade)
     grade_total = int(grade_total)
     waiting = float(waiting)
 
-    if waiting < 1 or waiting >= 0:
+    if waiting > 1 or waiting <= 0:
         print("Impossible result was entered", waiting )
         return 0
 
@@ -13,5 +19,61 @@ def grade_calculation(grade: int,grade_total: int,waiting: float):
     return fraction_grade * waiting
 
 
-print(grade_calculation(input("grade: "),input("grade total: "),input("waiting: ")))
+def grade_handling(grade):
+    
+
+    for i in range(len(grade["grade"])):
+        print("grade ",grade["grade"][i])
+        print("grade total ",grade["grade_total"][i])
+        print("waiting ",grade["waiting"][i])
+        print(grade_calculation(grade["grade"][i],grade["grade_total"][i],grade["waiting"][i]))
+    
+grade = {
+        "grade": [],
+        "grade_total": [],
+        "waiting": []
+    }
+grade_inp = []
+while True:
+    inp = input("grade: ")
+
+    if  inp:
+        inp = int(inp)
+        if inp >= 0:
+            grade_inp.append(inp)
+            
+        else:
+            grade
+            print(False)
+    else:
+        break
+grade["grade"] = grade_inp
+
+grade_inp = []
+
+for i in range(len(grade["grade"])):
+    inp = ""
+    while inp == "" and coe(inp,int) < grade["grade"][i]:
+        inp = input("grade total: ")
+    inp = int(inp)   
+    grade_inp.append(inp)
+    
+
+grade["grade_total"] = grade_inp
+
+grade_inp = []
+for i in range(len(grade["grade"])):
+    inp = ""
+    
+    while inp == "" and coe(inp,float) < 100 :
+        inp = input("waiting: ")
+        
+    inp = float(inp) / 100
+    grade_inp.append(inp)
+grade["waiting"] = grade_inp
+
+
+grade_handling(grade)
+
+#print(grade_calculation(input("grade: "),input("grade total: "),input("waiting: ")))
 
