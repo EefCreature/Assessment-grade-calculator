@@ -21,12 +21,13 @@ def grade_calculation(grade: int,grade_total: int,waiting: float):
 
 def grade_handling(grade):
     
-
+    through_grade = 0
     for i in range(len(grade["grade"])):
-        print("grade ",grade["grade"][i])
-        print("grade total ",grade["grade_total"][i])
-        print("waiting ",grade["waiting"][i])
-        print(grade_calculation(grade["grade"][i],grade["grade_total"][i],grade["waiting"][i]))
+        
+        through_grade += grade_calculation(grade["grade"][i],grade["grade_total"][i],grade["waiting"][i])
+    return through_grade
+    
+
     
 grade = {
         "grade": [],
@@ -72,8 +73,5 @@ for i in range(len(grade["grade"])):
     grade_inp.append(inp)
 grade["waiting"] = grade_inp
 
-
-grade_handling(grade)
-
-#print(grade_calculation(input("grade: "),input("grade total: "),input("waiting: ")))
-
+print("-"*40)
+print(round(grade_handling(grade) * 100))
