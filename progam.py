@@ -1,3 +1,20 @@
+import guizero as gz
+
+
+grade_naer = {
+    "A+": 90,
+    "A": 85,
+    "A-": 80,
+    "B+": 75,
+    "c": 60,
+    "B-":65,
+    "C+": 60,
+    "B": 70,
+    "C-": 50,
+    "D": 45,
+    "E": 0
+}
+
 def coe(vall,type:type):
     try:
         type(vall)
@@ -25,8 +42,19 @@ def grade_handling(grade):
     for i in range(len(grade["grade"])):
         
         through_grade += grade_calculation(grade["grade"][i],grade["grade_total"][i],grade["waiting"][i])
-    return through_grade
+    return through_grade, get_grade_naer(through_grade * 100)
     
+def get_grade_naer(grade):
+    resot = 0
+    for i in grade_naer:
+        
+        if grade >= grade_naer[i] and resot < grade_naer[i]:
+            
+            resot  = grade_naer[i]
+            
+            #return i
+    return(resot)
+
 
     
 grade = {
@@ -34,44 +62,15 @@ grade = {
         "grade_total": [],
         "waiting": []
     }
-grade_inp = []
-while True:
-    inp = input("grade: ")
 
-    if  inp:
-        inp = int(inp)
-        if inp >= 0:
-            grade_inp.append(inp)
-            
-        else:
-            grade
-            print(False)
-    else:
-        break
-grade["grade"] = grade_inp
+app = gz.App("s")
 
-grade_inp = []
 
-for i in range(len(grade["grade"])):
-    inp = ""
-    while inp == "" and coe(inp,int) < grade["grade"][i]:
-        inp = input("grade total: ")
-    inp = int(inp)   
-    grade_inp.append(inp)
-    
 
-grade["grade_total"] = grade_inp
 
-grade_inp = []
-for i in range(len(grade["grade"])):
-    inp = ""
-    
-    while inp == "" and coe(inp,float) < 100 :
-        inp = input("waiting: ")
-        
-    inp = float(inp) / 100
-    grade_inp.append(inp)
-grade["waiting"] = grade_inp
+app.display()
+
 
 print("-"*40)
-print(round(grade_handling(grade) * 100))
+
+print("Grade:",grade_handling(grade)[1],round(grade_handling(grade)[0] * 100))

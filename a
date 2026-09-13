@@ -1,0 +1,39 @@
+
+grade_inp = []
+while True:
+    inp = input("grade: ")
+
+    if  inp:
+        inp = int(inp)
+        if inp >= 0:
+            grade_inp.append(inp)
+            
+        else:
+            grade
+            print(False)
+    else:
+        break
+grade["grade"] = grade_inp
+
+grade_inp = []
+
+for i in range(len(grade["grade"])):
+    inp = ""
+    while inp == "" and coe(inp,int) < grade["grade"][i]:
+        inp = input("grade total: ")
+    inp = int(inp)   
+    grade_inp.append(inp)
+    
+
+grade["grade_total"] = grade_inp
+
+grade_inp = []
+for i in range(len(grade["grade"])):
+    inp = ""
+    
+    while inp == "" and coe(inp,float) < 100 :
+        inp = input("waiting: ")
+        
+    inp = float(inp) / 100
+    grade_inp.append(inp)
+grade["waiting"] = grade_inp
