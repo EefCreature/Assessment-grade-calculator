@@ -27,9 +27,11 @@ def grade_calculation(grade: int,grade_total: int,waiting: float):
     grade = int(grade)
     grade_total = int(grade_total)
     waiting = float(waiting)
-
-
-    fraction_grade = grade / grade_total
+    
+    if grade_total != 0:
+        fraction_grade = grade / grade_total
+    else:
+        fraction_grade =0
     return fraction_grade * waiting
 
 
@@ -85,9 +87,19 @@ def cale():
             try :
                 s = float(s)
             except:
-                print(False)
+                print(False,gr,s)
                 return
+            
             grade[gr].append(s)
+
+    waiting_toll =0
+    
+    for i in range( len(grade["waiting"])):
+        if grade["waiting"][i] != 0 :
+            grade["waiting"][i] /= 100
+        waiting_toll +=grade["waiting"][i]
+    if waiting_toll != 1:
+        return
     
     print("-"*40)
     print("Grade:",grade_handling(grade)[1],round(grade_handling(grade)[0] * 100))
