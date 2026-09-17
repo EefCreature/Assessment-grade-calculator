@@ -43,15 +43,15 @@ def coe(vall,type:type):
 
     pass
 
-def grade_calculation(grade: int,grade_total: int,waiting: float):
+def grade_calculation(grade: float,grade_total: float,waiting: float):
     """
     Performance the calculation of grade \n
     Total grade: cannot be greater than 0 \n
     weight: have to be less than 1 as usual enter for percentages
 
     """
-    grade = int(grade)
-    grade_total = int(grade_total)
+    grade = float(grade)
+    grade_total = float(grade_total)
     waiting = float(waiting)
 
     if grade > grade_total and grade != grade_total:
@@ -126,9 +126,11 @@ def button_calculate():
                 s = float(s)
             except:
                 
-                gz.error(title="error",text=("Error " + str(gr)+": "+ str(s)+" not a namer" ))
+                gz.error(title="error",text=("Error " + str(gr)+": "+ str(s)+" not a number" ))
                 return
-                
+            if s < 0:
+                gz.error(title="error",text=("Error " + str(gr)+": "+ str(s)+" cannot have a negative number" ))
+                return
             
             grade_dic[gr].append(s)
 
@@ -145,7 +147,7 @@ def button_calculate():
         return
 
     #Prints out the great
-    grade_text.value = str("grade:" + str( round(grade_handling(grade_dic)[0] * 100)))
+    grade_text.value = str("grade:" + "%"+ str( round(grade_handling(grade_dic)[0] * 100,2)))
     #Prints out the letter
     letter_text.value = str("letter:" + str( grade_handling(grade_dic)[1]))
     #Says if you pass or fail
@@ -153,6 +155,8 @@ def button_calculate():
         past_text.value = "Result: Pass"
     else:
         past_text.value = "Result: Failed "
+        gz.info(text="Require grade to pass %" +str( round(50-grade_handling(grade_dic)[0]* 100,2) ) ,title="Pop up")
+    
     
 """
 Setting up other UI
